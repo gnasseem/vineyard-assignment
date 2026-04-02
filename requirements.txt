@@ -1,0 +1,8 @@
+jupyter
+pandas
+notion-client
+openai
+pydantic
+python-dotenv
+matplotlib
+tabulate
