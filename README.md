@@ -1,57 +1,59 @@
 # LP–GP Matching System — Vineyard Ventures
 
-Automated LP shortlisting tool. Pulls Vineyard's Notion CRM, extracts structured
-investment signals from call notes using AI, and ranks LPs against a specific GP
-opportunity using configurable scoring lenses.
+Scores Vineyard's LP CRM against a specific GP opportunity and produces a ranked shortlist with outreach recommendations.
 
-## Quick Start
+---
+
+## For reviewers — just open the notebook
+
+All data is pre-cached. No API keys or scraping needed.
 
 ```bash
 pip install -r requirements.txt
-playwright install chromium
-cp .env.example .env   # fill in CEREBRAS_API_KEY (and NOTION keys if re-scraping)
 jupyter notebook lp_shortlist_analysis.ipynb
 ```
 
-The notebook loads from pre-cached data in `data/` — no API calls needed to view results.
+Run all cells top to bottom. The notebook loads from `data/lp_signals.json` and `data/raw_lp_data.json` — both already present in the repo.
 
-## Pipeline
+**To change the scoring lens** (e.g. prioritise geography over sector): edit `DEFAULT_LENS` in Cell 1 and re-run. Options: `deeptech_india` (default), `sector_first`, `geography_first`, `engagement_first`, `balanced`.
 
-```
-Step 1  fetch_notion_data.py      →  data/raw_lp_data.json
-Step 2  extract_signals.py        →  data/lp_signals.json
-        lp_shortlist_analysis.ipynb  →  ranked shortlist + visualisations
-```
-
-### Re-running from scratch
-
-```bash
-python scripts/fetch_notion_data.py   # Step 1: pull LP records from Notion
-python scripts/extract_signals.py     # Step 2: AI signal extraction via Cerebras
-jupyter notebook lp_shortlist_analysis.ipynb
-```
+---
 
 ## Files
 
-| File | Description |
-|------|-------------|
-| `lp_shortlist_analysis.ipynb` | Main deliverable — ranked shortlist, visualisations, sensitivity analysis |
-| `writeup.md` | Approach document (submit as PDF) |
-| `scripts/fetch_notion_data.py` | Step 1 — fetches LP records from Notion via Playwright → `raw_lp_data.json` |
-| `scripts/extract_signals.py` | Step 2 — Cerebras AI extraction of structured signals per LP |
-| `data/raw_lp_data.json` | Cached Notion data (13 LP records) |
-| `data/lp_signals.json` | Cached AI-extracted signals |
-| `.env.example` | Environment variable template |
+| File | What it is |
+|------|-----------|
+| `lp_shortlist_analysis.ipynb` | Main deliverable — ranked shortlist, charts, sensitivity analysis, outreach plan |
+| `writeup.md` | Approach document (submitted as PDF) |
+| `data/lp_signals.json` | Pre-extracted LP signals (13 LPs, 14 fields each) |
+| `data/raw_lp_data.json` | Raw Notion data including full call notes |
+| `scripts/fetch_notion_data.py` | Step 1 — scrapes LP records from Notion via Playwright |
+| `scripts/extract_signals.py` | Step 2 — AI signal extraction via Cerebras |
 | `requirements.txt` | Python dependencies |
+| `.env.example` | Environment variable template |
 
-## Key Design Decisions
+---
 
-- **Notion scraping via Playwright** — the CRM was shared as a public guest page with no
-  duplicatable API access, so `fetch_notion_data.py` uses Playwright to navigate each LP page
-  and extract structured properties and call notes directly from the DOM.
-- **AI for extraction, rules for scoring** — the language model extracts structure from prose;
-  deterministic weighted scoring produces auditable, reproducible rankings.
-- **Configurable weight lenses** — five scoring presets (Deeptech India, Sector-First,
-  Geography-First, Engagement-First, Balanced). Change `DEFAULT_LENS` in the notebook to re-rank.
-- **Sensitivity analysis** — the notebook shows how rankings shift across all five lenses;
-  LPs that appear in the top 5 under multiple lenses are robust recommendations.
+## Re-running the pipeline from scratch
+
+The two scripts are only needed if you want to re-scrape Notion or re-extract signals. This requires API credentials and is not needed to view results.
+
+```bash
+cp .env.example .env          # add CEREBRAS_API_KEY
+playwright install chromium   # one-time browser install (~150 MB)
+
+python scripts/fetch_notion_data.py   # scrape Notion → data/raw_lp_data.json
+python scripts/extract_signals.py     # AI extraction → data/lp_signals.json
+jupyter notebook lp_shortlist_analysis.ipynb
+```
+
+`extract_signals.py` is incremental — it skips LPs already in `lp_signals.json`, so partial runs are safe.
+
+---
+
+## Design decisions
+
+- **Playwright over Notion API** — the CRM was shared as a public guest link with no API access. Production swap: replace `fetch_notion_data.py` with Notion API calls; everything downstream stays the same.
+- **AI for extraction, rules for scoring** — LLM handles synonyms and implicit signals in free-text notes; deterministic weighted scoring produces auditable, reproducible rankings.
+- **Configurable lenses** — five weight presets so the same pipeline re-ranks correctly for a different fund type (e.g. geography-first vs sector-first).
+- **Sensitivity analysis** — ranks each LP under all five lenses; an LP that stays top-5 across every lens is a high-confidence pick.

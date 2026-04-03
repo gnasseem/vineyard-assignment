@@ -514,8 +514,8 @@
       "lp_type": "unknown",
       "aum_estimate": "unknown",
       "typical_check_size": "$4-5M",
-      "india_interest": 5,
-      "india_interest_rationale": "No explicit mention of India in the notes, but openness to emerging managers and small funds may indicate potential interest.",
+      "india_interest": 2,
+      "india_interest_rationale": "No mention of India or emerging markets anywhere in the call notes. Focus is on small US-based venture funds (Mark Ransford, Elefund, Preface). India fit is unconfirmed.",
       "preferred_fund_size": "Small",
       "preferred_stages": [
         "unknown"
