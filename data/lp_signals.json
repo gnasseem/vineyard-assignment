@@ -1,0 +1,582 @@
+[
+  {
+    "id": "fa0eca908fc9824ba36d010a40e4873f",
+    "name": "GEM",
+    "notion_url": "https://www.notion.so/GEM-fa0eca908fc9824ba36d010a40e4873f",
+    "structured_fields": {
+      "Check Size": "Big",
+      "Location": "SF",
+      "Status": "In Diligence"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/caroline-dallas-6aba26113/",
+      "https://www.linkedin.com/in/alexandrabadgett/"
+    ],
+    "signals": {
+      "lp_type": "Institutional",
+      "aum_estimate": "$10B",
+      "typical_check_size": "Big",
+      "india_interest": 8,
+      "india_interest_rationale": "GEM is increasingly looking at India, has met major funds like Peak XV and Lightspeed as well as smaller ones like Gradcap and Campus Fund, and is seeking better regional benchmarking; receptive to introductions to mid-tier funds like Prime, Sauce, Northpoint.",
+      "preferred_fund_size": "sub-100m, likes sub-50m",
+      "preferred_stages": [
+        "early stage"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 9,
+      "engagement_level": 7,
+      "blockers": [
+        "Requires track record and consistency in fund performance",
+        "Prefers managers with established networks and proven brand",
+        "May pass on managers lacking track record like Koko/Carlo"
+      ],
+      "positives": [
+        "Actively investing in emerging managers",
+        "Strong FOF experience and infrastructure",
+        "Open to new geographies like India",
+        "Respects sophisticated fund investors",
+        "Has already backed similar profiles like Basecase"
+      ],
+      "fit_score": 7,
+      "fit_rationale": "GEM is a strong potential LP for Vineyard Ventures given their focus on emerging managers, FOF experience, and growing interest in India. However, as a sophisticated OCIO managing $10B, they require evidence of track record and consistency, which may be a hurdle for a first-time fund. Their openness to new geographies and respect for deep network-building aligns well with Vineyard's positioning."
+    }
+  },
+  {
+    "id": "a3eeca908fc983df9d9701f652b9f6c6",
+    "name": "Everblue Capital Management",
+    "notion_url": "https://www.notion.so/Everblue-Capital-Management-a3eeca908fc983df9d9701f652b9f6c6",
+    "structured_fields": {
+      "Check Size": "Medium",
+      "Location": "NYC",
+      "Status": "In Diligence"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Institutional",
+      "aum_estimate": "unknown",
+      "typical_check_size": "Medium",
+      "india_interest": 7,
+      "india_interest_rationale": "They have a big position in Reliance and have invested in hedge funds in China, indicating a global investment approach with some exposure to India.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "Pre-seed",
+        "Seed",
+        "Late Stage"
+      ],
+      "emerging_manager_preference": false,
+      "deeptech_interest": true,
+      "sector_agnostic": false,
+      "sectors_mentioned": [
+        "TMT",
+        "Music",
+        "AI",
+        "Hardware",
+        "Defence",
+        "Biotech"
+      ],
+      "fof_experience": true,
+      "fof_openness": 3,
+      "engagement_level": 3,
+      "blockers": [
+        "No prior FoF investments",
+        "Preference for thematic investing over fund access style",
+        "Internal deliberation required"
+      ],
+      "positives": [
+        "Familiar with Nova and David's fund",
+        "Positive reaction to thematic and discovery angle",
+        "Global investment experience",
+        "Interest in thematic areas overlapping with Vineyard's focus"
+      ],
+      "fit_score": 5,
+      "fit_rationale": "Everblue has relevant thematic interests and global experience, including some India exposure, but lacks direct FoF experience and may prefer thematic direct investments over fund-of-funds structures. Their openness to internal discussion presents a moderate fit for Vineyard Ventures' emerging FoF strategy."
+    }
+  },
+  {
+    "id": "5c1eca908fc98292822e8114f3ff437c",
+    "name": "Dziugas",
+    "notion_url": "https://www.notion.so/Dziugas-5c1eca908fc98292822e8114f3ff437c",
+    "structured_fields": {
+      "Check Size": "Big",
+      "Location": "Lithuania",
+      "Status": "In Diligence"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Family Office",
+      "aum_estimate": "$55M",
+      "typical_check_size": "$5M-$10M",
+      "india_interest": 3,
+      "india_interest_rationale": "No explicit interest in India mentioned; focus is on Lithuania and local network for direct investments.",
+      "preferred_fund_size": "Smaller funds",
+      "preferred_stages": [
+        "Early stage"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 9,
+      "engagement_level": 8,
+      "blockers": [
+        "Preoccupied with family business exit in the next 6-8 weeks",
+        "Focus on local Lithuanian network for direct investments, limiting alignment on international deals",
+        "Not interested in large checks (neither $2M nor $20M), so check size must be carefully calibrated"
+      ],
+      "positives": [
+        "Strong interest in Vineyard as a continuation of Hummingbird brand",
+        "Willing to anchor with $5-10M check post-exit",
+        "High engagement desire and values direct relationships",
+        "Experienced FoF investor who understands and accepts fees",
+        "Prefers young, aligned, hands-on teams over large institutional platforms",
+        "Sees value in being a first believer and building close GP-LP ties"
+      ],
+      "fit_score": 8,
+      "fit_rationale": "Dziugas is a strong fit as an emerging manager-aligned, engaged LP with FoF experience and willingness to anchor a small fund. His interest in direct access, alignment with Vineyard's young team, and understanding of FoF value add are major positives. Main blockers are timing (exit process) and geographic focus for directs, but his commitment likelihood is high post-exit."
+    }
+  },
+  {
+    "id": "67beca908fc983dc906681ad0192dde6",
+    "name": "Charlie Goodacre",
+    "notion_url": "https://www.notion.so/Charlie-Goodacre-67beca908fc983dc906681ad0192dde6",
+    "structured_fields": {
+      "Location": "Kenya",
+      "Status": "In Diligence"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/charliegoodacre/"
+    ],
+    "signals": {
+      "lp_type": "SFO",
+      "aum_estimate": "unknown",
+      "typical_check_size": "unknown",
+      "india_interest": 2,
+      "india_interest_rationale": "No explicit interest in India mentioned; family has operating businesses in Nigeria and based in UK, with focus on Europe over US. No indication of India-specific activity or interest.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "pre-seed",
+        "seed"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 8,
+      "engagement_level": 7,
+      "blockers": [
+        "No explicit India focus",
+        "Limited direct VC experience",
+        "Geographic preference for Europe"
+      ],
+      "positives": [
+        "Experienced in fund-of-funds through Isomer",
+        "Prefers emerging managers",
+        "Collaborative approach",
+        "Sector agnostic",
+        "Strong operational involvement",
+        "Family office has long-term investment horizon"
+      ],
+      "fit_score": 5,
+      "fit_rationale": "Charlie's SFO has relevant FoF experience and a clear preference for emerging managers, which aligns with Vineyard Ventures' profile. They are sector agnostic and open to early-stage investing, matching the fund's strategy. However, their geographic focus is strongly tilted toward Europe, with no evident interest or presence in India, which is a key mismatch given Vineyard's India-specific deeptech focus. Additionally, while they have built an internal FoF, their direct engagement in emerging markets like India is unproven, creating execution risk. Moderate fit due to strategic alignment on manager profile but significant geographic misalignment."
+    }
+  },
+  {
+    "id": "d58eca908fc9828d9655810b3e62afcd",
+    "name": "Weizmann Institute endowment",
+    "notion_url": "https://www.notion.so/Weizmann-Institute-endowment-d58eca908fc9828d9655810b3e62afcd",
+    "structured_fields": {
+      "Check Size": "Big",
+      "Location": "NYC",
+      "Status": "Nurture"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Endowment",
+      "aum_estimate": "$5B",
+      "typical_check_size": "Big",
+      "india_interest": 7,
+      "india_interest_rationale": "The LP has existing India exposure through Z47 (ex-Matrix India), two public managers, and a legacy manager. They are actively assessing India opportunities and targeting emerging differentiated managers, despite concerns about competition, valuations, and fraud risk.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "Fund 1-2"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": true,
+      "sector_agnostic": false,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 8,
+      "engagement_level": 7,
+      "blockers": [
+        "High valuations in India",
+        "Competitive market",
+        "Risk of delayed DPI",
+        "Fraud risk concerns",
+        "Z47 relationship less compelling post-Matrix separation"
+      ],
+      "positives": [
+        "Backs managers early in lifecycle (Fund 1-2)",
+        "Substantial backing when committed",
+        "No geographic quotas",
+        "Actively seeking emerging differentiated managers",
+        "Existing India exposure"
+      ],
+      "fit_score": 7,
+      "fit_rationale": "Weizmann Institute endowment is a strong potential fit for Vineyard Ventures as they prefer early-stage commitments to emerging managers (Fund 1-2), have existing India exposure, and are open to FoFs. Their $5B AUM and big check size align with capacity to invest. However, concerns around Indian market valuations, competition, and DPI timing may require mitigation. Their concentration strategy and high bar for manager selection mean Vineyard must demonstrate strong differentiation."
+    }
+  },
+  {
+    "id": "8d1eca908fc982e9862d81b54408a1b9",
+    "name": "Mildred Swinton",
+    "notion_url": "https://www.notion.so/Mildred-Swinton-8d1eca908fc982e9862d81b54408a1b9",
+    "structured_fields": {
+      "Check Size": "Personal",
+      "Status": "Nurture"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Single Family Office",
+      "aum_estimate": null,
+      "typical_check_size": "Personal",
+      "india_interest": 7,
+      "india_interest_rationale": "Mildred Swinton has expressed interest in India as one of the geographies for investment, alongside China, SEA, and US.",
+      "preferred_fund_size": null,
+      "preferred_stages": [
+        "Early-stage",
+        "Late-stage"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": false,
+      "fof_openness": 6,
+      "engagement_level": 4,
+      "blockers": [
+        "Limited knowledge outside of crypto",
+        "Personal check size may limit allocation to small emerging funds"
+      ],
+      "positives": [
+        "Interested in funds",
+        "Open to emerging managers",
+        "Geographic interest in India",
+        "Sector agnostic"
+      ],
+      "fit_score": 5,
+      "fit_rationale": "Mildred Swinton shows interest in early-stage funds and emerging managers, with a geographic focus on India, which aligns with Vineyard Ventures' strategy. However, her limited exposure outside crypto and personal check size may pose challenges for committing to a $20M emerging FoF. The fit is moderate with potential if she is willing to make a meaningful allocation."
+    }
+  },
+  {
+    "id": "b01eca908fc98309ba5b81dfc54a466b",
+    "name": "Rezayat",
+    "notion_url": "https://www.notion.so/Rezayat-b01eca908fc98309ba5b81dfc54a466b",
+    "structured_fields": {
+      "Check Size": "Medium",
+      "Location": "Saudi Arabia",
+      "Status": "Nurture"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/james-eggington-78ba55104/"
+    ],
+    "signals": {
+      "lp_type": "Family Office",
+      "aum_estimate": "unknown",
+      "typical_check_size": "Medium",
+      "india_interest": 3,
+      "india_interest_rationale": "No explicit interest in India mentioned; focus has been on US/EU investments, but open to global opportunities given venture activity across geographies.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "pre-seed",
+        "growth"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": true,
+      "sector_agnostic": false,
+      "sectors_mentioned": [
+        "power plants",
+        "industrial",
+        "public",
+        "PE",
+        "venture"
+      ],
+      "fof_experience": true,
+      "fof_openness": 7,
+      "engagement_level": 5,
+      "blockers": [
+        "No explicit India focus",
+        "Limited team (only James + family)",
+        "Geographic distance to India may reduce engagement"
+      ],
+      "positives": [
+        "Familiarity with Ben through James Eggington",
+        "Experience investing across venture stages",
+        "Open to emerging managers",
+        "Direct venture and FoF experience",
+        "Industrial background aligns with deeptech"
+      ],
+      "fit_score": 6,
+      "fit_rationale": "Rezayat has relevant FoF and venture experience and is open to emerging managers, with a stage alignment to Vineyard's focus. However, their India interest is unclear and their team is small, which may limit engagement and decision speed. Industrial background provides some alignment with deeptech, but no explicit India track record reduces fit."
+    }
+  },
+  {
+    "id": "1ebeca908fc983808180014161269aff",
+    "name": "Jordan park",
+    "notion_url": "https://www.notion.so/Jordan-park-1ebeca908fc983808180014161269aff",
+    "structured_fields": {
+      "Check Size": "Medium",
+      "Location": "SF",
+      "Status": "Nurture"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Fund of Funds",
+      "aum_estimate": "$9B",
+      "typical_check_size": "$15M",
+      "india_interest": 3,
+      "india_interest_rationale": "Low bandwidth and hasn't done much outside the US, but is overall curious about international opportunities.",
+      "preferred_fund_size": "Large",
+      "preferred_stages": [
+        "Pre-seed",
+        "Seed"
+      ],
+      "emerging_manager_preference": false,
+      "deeptech_interest": true,
+      "sector_agnostic": false,
+      "sectors_mentioned": [
+        "AI",
+        "Hardware",
+        "Defence",
+        "Biotech"
+      ],
+      "fof_experience": true,
+      "fof_openness": 4,
+      "engagement_level": 3,
+      "blockers": [
+        "Large check size mismatch ($15M minimum vs. $20M fund)",
+        "Low bandwidth",
+        "Focus on Fund 2/3s, not Fund 1",
+        "Limited international bandwidth, especially for India"
+      ],
+      "positives": [
+        "Warm to FoF strategy",
+        "Likes Compound (a peer)",
+        "Has venture team and $1B dedicated to venture",
+        "Open to new relationships despite limited recent activity)",
+        "Interests align with deeptech sectors"
+      ],
+      "fit_score": 4,
+      "fit_rationale": "Jordan Park is a strong strategic fit in terms of sector and FoF experience, but a poor fit in check size, fund vintage preference, and bandwidth. They prefer larger, established funds and have a $15M minimum check, which is 75% of Vineyard's entire fund size. They are also focused on Fund 2/3s, while Vineyard is a Fund 1. However, their interest in Compound and openness to FoFs provides a potential bridge for future dialogue if Vineyard scales."
+    }
+  },
+  {
+    "id": "a71eca908fc98214acbb8198709a1bb1",
+    "name": "Ak Asset Management",
+    "notion_url": "https://www.notion.so/Ak-Asset-Management-a71eca908fc98214acbb8198709a1bb1",
+    "structured_fields": {
+      "Check Size": "Small",
+      "Location": "Istanbul",
+      "Status": "Qualified"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "Institutional",
+      "aum_estimate": "unknown",
+      "typical_check_size": "$2-10M",
+      "india_interest": 1,
+      "india_interest_rationale": "No mention of India or interest in Indian markets; focus is on US/Europe and downside protection rather than high-growth emerging markets.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "unknown"
+      ],
+      "emerging_manager_preference": false,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [
+        "PE",
+        "venture",
+        "directs"
+      ],
+      "fof_experience": true,
+      "fof_openness": 2,
+      "engagement_level": 2,
+      "blockers": [
+        "Focus on US/Europe",
+        "Lack of interest in India",
+        "Preference for downside protection over high-risk venture",
+        "No apparent interest in emerging managers or deeptech"
+      ],
+      "positives": [
+        "Experience with fund investments (e.g., Portage, Apis, General Atlantic)",
+        "Willingness to write checks in the $2-10M range",
+        "Some venture exposure through Suzan Sabanci's portfolio"
+      ],
+      "fit_score": 2,
+      "fit_rationale": "Poor fit for Vineyard Ventures due to lack of interest in India, deeptech, and emerging managers. While they have FoF experience and can write checks in range, their geographic and strategic focus is misaligned with the fund's Indian deeptech seed-stage mandate."
+    }
+  },
+  {
+    "id": "bc0eca908fc982dcbdb9819343e1132d",
+    "name": "UVIMCO",
+    "notion_url": "https://www.notion.so/UVIMCO-bc0eca908fc982dcbdb9819343e1132d",
+    "structured_fields": {
+      "Check Size": "Big",
+      "Status": "Qualified"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/lindsay-larsen-cfa-93966a/",
+      "https://www.linkedin.com/in/jeffrey-barnes-27225020/"
+    ],
+    "signals": {
+      "lp_type": "Institutional",
+      "aum_estimate": "unknown",
+      "typical_check_size": "20-30m",
+      "india_interest": 7,
+      "india_interest_rationale": "Has done A91 in India (growth) and likes Accel there, indicating existing interest and experience in Indian venture investing.",
+      "preferred_fund_size": "unknown",
+      "preferred_stages": [
+        "growth"
+      ],
+      "emerging_manager_preference": false,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 8,
+      "engagement_level": 6,
+      "blockers": [
+        "May prefer larger, established funds over emerging managers like Vineyard Ventures; limited focus on pre-seed/seed and deeptech in India"
+      ],
+      "positives": [
+        "Experienced FoF investor with capacity for large checks ($20-30M); open to FoFs; has prior India exposure through A91 and Accel; target allocation to venture increasing from 10% to 13%"
+      ],
+      "fit_score": 5,
+      "fit_rationale": "UVIMCO is a seasoned FoF investor with large check sizes and some India experience, which are positives. However, their focus on growth-stage funds, established managers, and lack of evident deeptech or pre-seed/seed focus in India creates a moderate fit with Vineyard Ventures' emerging, small, India-focused deeptech seed strategy."
+    }
+  },
+  {
+    "id": "e3beca908fc982109b5a818981f12ad1",
+    "name": "Valence8",
+    "notion_url": "https://www.notion.so/Valence8-e3beca908fc982109b5a818981f12ad1",
+    "structured_fields": {
+      "Check Size": "Medium",
+      "Location": "NYC",
+      "Status": "Qualified"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/colin-pan-578598/"
+    ],
+    "signals": {
+      "lp_type": "unknown",
+      "aum_estimate": null,
+      "typical_check_size": "Medium",
+      "india_interest": 0,
+      "india_interest_rationale": "The LP focuses exclusively on the US and has no interest in emerging markets, including India.",
+      "preferred_fund_size": null,
+      "preferred_stages": [
+        "early"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": false,
+      "fof_openness": 3,
+      "engagement_level": 3,
+      "blockers": [
+        "Focus on US only, no interest in India or emerging markets",
+        "Lack of FoF experience"
+      ],
+      "positives": [
+        "Open to emerging managers",
+        "Interested in early-stage opportunities"
+      ],
+      "fit_score": 2,
+      "fit_rationale": "Valence8 is aligned with Vineyard Ventures on early-stage and emerging manager preferences, but there is a significant misalignment in geography as Valence8 focuses exclusively on the US and has no interest in India or emerging markets. Additionally, they lack FoF experience, which reduces their fit for a fund-of-funds opportunity focused on Indian deeptech."
+    }
+  },
+  {
+    "id": "f83eca908fc982c18c9a011147474754",
+    "name": "Alber blanc",
+    "notion_url": "https://www.notion.so/Alber-blanc-f83eca908fc982c18c9a011147474754",
+    "structured_fields": {
+      "Check Size": "Medium",
+      "Location": "NYC",
+      "Status": "Qualified"
+    },
+    "linkedin_urls": [],
+    "signals": {
+      "lp_type": "unknown",
+      "aum_estimate": "unknown",
+      "typical_check_size": "$4-5M",
+      "india_interest": 5,
+      "india_interest_rationale": "No explicit mention of India in the notes, but openness to emerging managers and small funds may indicate potential interest.",
+      "preferred_fund_size": "Small",
+      "preferred_stages": [
+        "unknown"
+      ],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 8,
+      "engagement_level": 7,
+      "blockers": [],
+      "positives": [
+        "Open to first-time funds",
+        "Has allocated to or considered other emerging managers like Mark Ransford and Elefund",
+        "Engaged with many in the ecosystem",
+        "Appreciative and responsive"
+      ],
+      "fit_score": 7,
+      "fit_rationale": "Alber Blanc is highly aligned with Vineyard Ventures' emerging, small-fund profile and has shown openness to first-time GPs. While there is no explicit mention of India or deeptech, his sector-agnostic approach and FoF experience make him a strong potential LP. The lack of specific India focus is a minor concern, but not a blocker given his overall profile."
+    }
+  },
+  {
+    "id": "4ddeca908fc982c19b3e81bec4fdd870",
+    "name": "YMCA endowment",
+    "notion_url": "https://www.notion.so/YMCA-endowment-4ddeca908fc982c19b3e81bec4fdd870",
+    "structured_fields": {
+      "Check Size": "Big",
+      "Location": "NYC",
+      "Status": "Qualified"
+    },
+    "linkedin_urls": [
+      "https://www.linkedin.com/in/erik-strobel-cfa-9039383a/"
+    ],
+    "signals": {
+      "lp_type": "Institutional",
+      "aum_estimate": "$1.5B",
+      "typical_check_size": "Big",
+      "india_interest": 5,
+      "india_interest_rationale": "Has prior exposure to India through LSVP and shows openness to emerging markets, though limited Europe exposure suggests selectivity.",
+      "preferred_fund_size": "$200-500M",
+      "preferred_stages": [],
+      "emerging_manager_preference": true,
+      "deeptech_interest": false,
+      "sector_agnostic": true,
+      "sectors_mentioned": [],
+      "fof_experience": true,
+      "fof_openness": 7,
+      "engagement_level": 6,
+      "blockers": [
+        "Fund size too small ($20M vs $200-500M target)",
+        "Lack of institutional polish may deter despite early-stage interest"
+      ],
+      "positives": [
+        "Open to early engagement with emerging managers",
+        "Experience with FoFs (e.g., LSVP)",
+        "Interest in high-conviction, A* funds",
+        "Global outlook with emerging market experience"
+      ],
+      "fit_score": 4,
+      "fit_rationale": "Partial fit: YMCA endowment prefers larger fund sizes and has a narrow roster, making a $20M fund a stretch. However, their openness to early-stage relationships and FoF experience creates some alignment. The fund's small size and emerging status may require strong narrative to overcome check size and scale concerns."
+    }
+  }
+]
