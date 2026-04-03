@@ -49,8 +49,9 @@ jupyter notebook lp_gp_matching.ipynb
 
 ## Key Design Decisions
 
-- **Notion API for data fetch** — `fetch_notion_data.py` uses the official `notion-client`
-  library to query the LP database and recursively extract call notes from nested page blocks.
+- **Notion scraping via Playwright** — the CRM was shared as a public guest page with no
+  duplicatable API access, so `fetch_notion_data.py` uses Playwright to navigate each LP page
+  and extract structured properties and call notes directly from the DOM.
 - **AI for extraction, rules for scoring** — the language model extracts structure from prose;
   deterministic weighted scoring produces auditable, reproducible rankings.
 - **Configurable weight lenses** — five scoring presets (Deeptech India, Sector-First,
