@@ -7,3 +7,4 @@ python-dotenv
 matplotlib
 tabulate
 playwright
+notion-client

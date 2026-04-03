@@ -1,7 +1,17 @@
 """
-Step 2: AI Signal Extraction
+Step 3: AI Signal Extraction
+
 Reads raw_lp_data.json, calls Cerebras (Qwen 3 235B) to extract structured
 investment signals from each LP's call notes, and writes lp_signals.json.
+
+Each LP's call notes are passed through a structured-output prompt that maps
+free-form prose to a Pydantic schema (LPSignals).  The model is instructed to
+score dimensions on 0–10 scales and base every rating on explicit evidence —
+no invented signals.
+
+Supports incremental re-runs: if lp_signals.json already exists, only LPs
+not yet processed are sent to the API.  Results are persisted after every LP
+so a partial run is never lost.
 
 GP context: Vineyard Ventures — $20M fund, pre-seed/seed, Indian deeptech
 (AI, hardware, defence, bio).

@@ -1,220 +1,202 @@
 """
-Step 1: Fetch LP data from Notion CRM via Playwright browser scraping.
+Step 1: Fetch LP data from Notion CRM.
 
-Approach: The Notion CRM is shared as a public guest page — no login required.
-We use Playwright to navigate to each LP's page, extract structured properties
-and call notes from the DOM, then follow any nested note sub-pages.
-
-NOTE: This script was developed interactively using Claude Code's Playwright MCP,
-which navigated each page and used JavaScript evaluation to extract data. The
-resulting data is saved to data/raw_lp_data.json. Re-running this script will
-re-scrape and overwrite that cache.
-
-Why Playwright over Notion API:
-    The shared CRM page was not duplicatable without admin access, so the Notion
-    API integration flow (which requires duplicating the page) was not available.
-    Playwright scrapes the publicly accessible shared URL directly.
-
-    In a production system with API access, notion-client would be preferable:
-    it's faster, more reliable, and handles pagination/rate-limiting natively.
-
+Connects to the Notion API, queries the LP database, and recursively
+extracts structured fields + call notes from nested page blocks.
 Output: data/raw_lp_data.json
 """
 
 import json
+import os
 import time
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright
+from dotenv import load_dotenv
+from notion_client import Client
 
-# ── Config ────────────────────────────────────────────────────────────────────
+load_dotenv()
 
-DATABASE_URL = (
-    "https://www.notion.so/9efeca908fc983c08dd4815dafd6eb88"
-    "?v=5d6eca908fc9835597708853b2d5d75f"
-)
+NOTION_API_KEY = os.getenv("NOTION_API_KEY")
+NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID")
 OUTPUT_PATH = Path(__file__).parent.parent / "data" / "raw_lp_data.json"
 
-# LP page IDs discovered via data-block-id attribute scraping on the database view.
-# Format: (name, notion_page_id)
-LP_PAGES = [
-    ("GEM",                         "fa0eca908fc9824ba36d010a40e4873f"),
-    ("Everblue Capital Management",  "a3eeca908fc983df9d9701f652b9f6c6"),
-    ("Dziugas",                      "5c1eca908fc98292822e8114f3ff437c"),
-    ("Charlie Goodacre",             "67beca908fc983dc906681ad0192dde6"),
-    ("Weizmann Institute endowment", "d58eca908fc9828d9655810b3e62afcd"),
-    ("Mildred Swinton",              "8d1eca908fc982e9862d81b54408a1b9"),
-    ("Rezayat",                      "b01eca908fc98309ba5b81dfc54a466b"),
-    ("Jordan park",                  "1ebeca908fc983808180014161269aff"),
-    ("Ak Asset Management",          "a71eca908fc98214acbb8198709a1bb1"),
-    ("UVIMCO",                       "bc0eca908fc982dcbdb9819343e1132d"),
-    ("Valence8",                     "e3beca908fc982109b5a818981f12ad1"),
-    ("Alber blanc",                  "f83eca908fc982c18c9a011147474754"),
-    ("YMCA endowment",               "4ddeca908fc982c19b3e81bec4fdd870"),
-]
 
-# ── Extraction helpers ────────────────────────────────────────────────────────
-
-EXTRACT_JS = """
-() => {
-  const main = document.querySelector('main') || document.body;
-
-  // Title (h1)
-  const title = (main.querySelector('h1') || {}).textContent?.trim() || '';
-
-  // Structured properties (table rows in the property panel)
-  const props = {};
-  main.querySelectorAll('table tr, [role="row"]').forEach(row => {
-    const cells = row.querySelectorAll('td, [role="cell"]');
-    if (cells.length >= 2) {
-      const key = cells[0].textContent.trim();
-      const val = cells[1].textContent.trim();
-      if (key && val && val !== 'Empty') props[key] = val;
-    }
-  });
-
-  // Body text via Notion's editable leaf nodes
-  const allText = [];
-  main.querySelectorAll('[data-content-editable-leaf]').forEach(el => {
-    const t = el.textContent.trim();
-    if (t) allText.push(t);
-  });
-
-  // Links: LinkedIn URLs and nested Notion page links
-  const linkedPages = [];
-  const linkedinUrls = [];
-  main.querySelectorAll('a').forEach(a => {
-    const href = a.href || '';
-    if (href.includes('linkedin.com')) linkedinUrls.push(href);
-    if (href.includes('notion.so') && !href.includes('?v=') && a.textContent.trim()) {
-      linkedPages.push({ text: a.textContent.trim(), url: href });
-    }
-  });
-
-  return {
-    title,
-    props,
-    body_text: allText.join('\\n'),
-    linked_pages: linkedPages,
-    linkedin_urls: [...new Set(linkedinUrls)],
-  };
-}
-"""
-
-TEXT_ONLY_JS = """
-() => {
-  const main = document.querySelector('main') || document.body;
-  const allText = [];
-  main.querySelectorAll('[data-content-editable-leaf]').forEach(el => {
-    const t = el.textContent.trim();
-    if (t) allText.push(t);
-  });
-  // Also capture any LinkedIn URLs in nested pages
-  const linkedinUrls = [];
-  main.querySelectorAll('a').forEach(a => {
-    if ((a.href || '').includes('linkedin.com')) linkedinUrls.push(a.href);
-  });
-  return { text: allText.join('\\n'), linkedin_urls: [...new Set(linkedinUrls)] };
-}
-"""
+def get_plain_text(rich_text_list: list) -> str:
+    """Extract plain text from a Notion rich_text array."""
+    return "".join(item.get("plain_text", "") for item in rich_text_list)
 
 
-def wait_for_notion(page, timeout=10000):
-    """Wait until Notion's main content is rendered."""
-    page.wait_for_selector('[data-content-editable-leaf], h1', timeout=timeout)
+def extract_property(prop: dict) -> str | list | None:
+    """Extract a human-readable value from any Notion property object."""
+    ptype = prop.get("type")
+    if ptype == "title":
+        return get_plain_text(prop["title"])
+    elif ptype == "rich_text":
+        return get_plain_text(prop["rich_text"])
+    elif ptype == "select":
+        sel = prop.get("select")
+        return sel["name"] if sel else None
+    elif ptype == "multi_select":
+        return [item["name"] for item in prop.get("multi_select", [])]
+    elif ptype == "url":
+        return prop.get("url")
+    elif ptype == "email":
+        return prop.get("email")
+    elif ptype == "phone_number":
+        return prop.get("phone_number")
+    elif ptype == "number":
+        return prop.get("number")
+    elif ptype == "checkbox":
+        return prop.get("checkbox")
+    elif ptype == "date":
+        date = prop.get("date")
+        return date["start"] if date else None
+    elif ptype == "people":
+        return [p.get("name") for p in prop.get("people", [])]
+    elif ptype == "files":
+        return [f.get("name") for f in prop.get("files", [])]
+    elif ptype == "relation":
+        return [r["id"] for r in prop.get("relation", [])]
+    elif ptype == "formula":
+        formula = prop.get("formula", {})
+        ftype = formula.get("type")
+        return formula.get(ftype)
+    elif ptype == "status":
+        status = prop.get("status")
+        return status["name"] if status else None
+    return None
 
 
-def extract_lp_page(page, name: str, page_id: str) -> dict:
-    """Navigate to an LP page and extract all data including nested sub-pages."""
-    url = f"https://www.notion.so/{page_id}"
-    print(f"  → {name}: {url}")
-    page.goto(url)
+def extract_blocks_text(notion: Client, block_id: str, depth: int = 0) -> tuple[str, list[str]]:
+    """
+    Recursively extract text content and LinkedIn URLs from all blocks under block_id.
+    Returns (text_content, linkedin_urls).
+    """
+    text_parts = []
+    linkedin_urls = []
 
     try:
-        wait_for_notion(page)
-    except Exception:
-        print(f"    Warning: timeout waiting for content on {name}")
-        time.sleep(3)
+        response = notion.blocks.children.list(block_id=block_id)
+    except Exception as e:
+        print(f"  Warning: could not fetch blocks for {block_id}: {e}")
+        return "", []
 
-    data = page.evaluate(EXTRACT_JS)
+    for block in response.get("results", []):
+        btype = block.get("type", "")
+        block_data = block.get(btype, {})
 
-    # Follow nested Notion page links (e.g. "GEM notes Oct 2025")
-    nested_notes = []
-    nested_linkedin = []
+        # Extract rich text from common block types
+        rich_text = block_data.get("rich_text", [])
+        if rich_text:
+            line = get_plain_text(rich_text)
+            if line.strip():
+                indent = "  " * depth
+                text_parts.append(f"{indent}{line}")
 
-    for linked in data.get("linked_pages", []):
-        nested_url = linked["url"].split("?")[0]  # strip query params
-        print(f"    ↳ nested page: {linked['text']}")
-        page.goto(nested_url)
-        try:
-            wait_for_notion(page)
-        except Exception:
-            time.sleep(3)
-        nested_data = page.evaluate(TEXT_ONLY_JS)
-        if nested_data["text"]:
-            nested_notes.append(
-                f"--- {linked['text']} ---\n{nested_data['text']}"
-            )
-        nested_linkedin.extend(nested_data.get("linkedin_urls", []))
-        time.sleep(1)
+            # Scan for LinkedIn URLs in rich text annotations/links
+            for rt in rich_text:
+                href = rt.get("href") or (rt.get("text", {}) or {}).get("link", {}) or {}
+                if isinstance(href, dict):
+                    href = href.get("url", "")
+                if href and "linkedin.com" in str(href):
+                    linkedin_urls.append(href)
 
-    # Combine body text + nested page text into call_notes
-    parts = []
-    if data["body_text"] and data["body_text"].strip() != name:
-        # Strip the page title from body_text if Notion included it as first line
-        lines = data["body_text"].split("\n")
-        body = "\n".join(l for l in lines if l.strip() != name)
-        if body.strip():
-            parts.append(body)
-    parts.extend(nested_notes)
-    call_notes = "\n\n".join(parts)
+        # Handle URL blocks (bookmarks, embeds)
+        if btype in ("bookmark", "embed", "link_preview"):
+            url = block_data.get("url", "")
+            if url and "linkedin.com" in url:
+                linkedin_urls.append(url)
 
-    all_linkedin = list(set(data["linkedin_urls"] + nested_linkedin))
+        # Recurse into child blocks
+        if block.get("has_children"):
+            child_text, child_links = extract_blocks_text(notion, block["id"], depth + 1)
+            if child_text:
+                text_parts.append(child_text)
+            linkedin_urls.extend(child_links)
+
+    return "\n".join(text_parts), linkedin_urls
+
+
+def fetch_all_lps(notion: Client) -> list[dict]:
+    """Query all LP records from the database, handling pagination."""
+    results = []
+    cursor = None
+
+    while True:
+        kwargs = {"database_id": NOTION_DATABASE_ID}
+        if cursor:
+            kwargs["start_cursor"] = cursor
+
+        response = notion.databases.query(**kwargs)
+        results.extend(response.get("results", []))
+
+        if not response.get("has_more"):
+            break
+        cursor = response.get("next_cursor")
+
+    return results
+
+
+def process_lp(notion: Client, page: dict) -> dict:
+    """Extract all fields from a single LP page record."""
+    page_id = page["id"]
+    properties = page.get("properties", {})
+
+    # Extract all structured properties
+    structured = {}
+    for prop_name, prop_value in properties.items():
+        value = extract_property(prop_value)
+        if value is not None:
+            structured[prop_name] = value
+
+    # Determine LP name (title property, whatever it's called)
+    name = None
+    for prop_name, prop_value in properties.items():
+        if prop_value.get("type") == "title":
+            name = get_plain_text(prop_value["title"])
+            break
+
+    # Extract call notes and LinkedIn URLs from nested blocks
+    print(f"  Fetching blocks for: {name or page_id}")
+    call_notes, linkedin_urls = extract_blocks_text(notion, page_id)
 
     return {
         "id": page_id,
         "name": name,
-        "notion_url": f"https://www.notion.so/{page_id}",
-        "structured_fields": data["props"],
         "call_notes": call_notes,
-        "linkedin_urls": all_linkedin,
+        "linkedin_urls": list(set(linkedin_urls)),  # deduplicate
+        "structured_fields": structured,
+        "notion_url": page.get("url"),
     }
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
-
 def main():
+    if not NOTION_API_KEY:
+        raise ValueError("NOTION_API_KEY not set in .env")
+    if not NOTION_DATABASE_ID:
+        raise ValueError("NOTION_DATABASE_ID not set in .env")
+
+    notion = Client(auth=NOTION_API_KEY)
+
+    print("Fetching LP records from Notion database...")
+    pages = fetch_all_lps(notion)
+    print(f"Found {len(pages)} LP records")
+
+    lps = []
+    for i, page in enumerate(pages):
+        print(f"\n[{i+1}/{len(pages)}] Processing LP...")
+        lp = process_lp(notion, page)
+        lps.append(lp)
+        # Respect Notion API rate limits (3 req/s)
+        time.sleep(0.4)
+
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-
-    with sync_playwright() as p:
-        # Launch in non-headless mode so user can log in if required.
-        # The Notion pages are publicly shared as guest, so login is typically
-        # not needed — but if a login wall appears, handle it manually.
-        browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
-
-        print(f"Navigating to database: {DATABASE_URL}")
-        page.goto(DATABASE_URL)
-        time.sleep(3)  # let Notion load
-
-        # ── If you see a login prompt, log in now. ──
-        # The script will wait 30s to give you time before proceeding.
-        # In practice the shared guest page doesn't require login.
-        # If it does, uncomment the line below:
-        # input("Press Enter after logging in...")
-
-        lps = []
-        for name, page_id in LP_PAGES:
-            lp = extract_lp_page(page, name, page_id)
-            lps.append(lp)
-            time.sleep(1.5)  # polite delay between pages
-
-        browser.close()
-
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(lps, f, indent=2, ensure_ascii=False)
 
     print(f"\nDone. Saved {len(lps)} LP records to {OUTPUT_PATH}")
+
+    # Quick summary
     with_notes = sum(1 for lp in lps if lp["call_notes"].strip())
     with_linkedin = sum(1 for lp in lps if lp["linkedin_urls"])
     print(f"  {with_notes}/{len(lps)} LPs have call notes")
